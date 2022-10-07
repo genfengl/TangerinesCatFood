@@ -1,0 +1,29 @@
+<%- include ('./partials/head.ejs') %> 
+
+<main class="new">
+    <h1>Add New Item</h1>
+
+    <form method="post" action="/catfoods">
+        <!-- label for id of input -->
+        <label for="name">Name</label> <br />
+        <input type="text" name="name" id="name" required /> <br />
+
+        <label for="price">Price</label> <br />
+        <input type="text" name="price" id="price" required /> <br />
+
+        <label for="brand">Brand</label> <br />
+        <input type="text" name="brand" id="brand" required /> <br />
+
+        <label for="description">Description</label> <br />
+        <textarea type="text" name="description" id="description"></textarea> <br />
+
+        <label for="image">Image</label> <br />
+        <input type="file" name="image" id="image" /> <br />
+
+        <br />
+
+        <input type="submit" value="Add Item"/>
+    </form>
+</main>
+
+<%- include ('./partials/foot.ejs') %>
