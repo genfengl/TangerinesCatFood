@@ -1,0 +1,11 @@
+<%- include ('./partials/head.ejs') %>
+
+<main class="show">
+    <h1><%= catfood.name %> </h1>
+    <h3>Brand: <%= catfood.brand %> </h3>
+    <h3>Price: $ <%= catfood.price %> </h3>
+    <img src="<%= catfood.imageURL %> " />
+    <a href="/catfoods/<%= catfood._id %>/delete_confirmation">DELETE</a>
+</main>
+
+<%- include ('./partials/foot.ejs') %>

@@ -9,12 +9,12 @@ const app = express()
 const PORT = process.env.PORT
 const dbURL = process.env.MONGODB_URL
 
-const Catfood = require('./models/catfood')
 
-app.use(catfoodsController)
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
+
+app.use(catfoodsController)
 
 
 

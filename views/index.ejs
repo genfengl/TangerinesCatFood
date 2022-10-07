@@ -3,10 +3,14 @@
 <main class="index">
     <h1>Catalogue</h1>
     <ul>
-        <% catfoods.forEach((catfood) => { %>
+        <% catfoods.forEach(catfood => { %>
             <li>
                 <h3><%= catfood.name %> </h3>
+                <h3><%= catfood.brand %> </h3>
                 <h3>Price: $<%= catfood.price %></h3>
+                <a href="/catfoods/<%= catfood._id %>">
+                    <img src="<%= catfood.imageURL %>" />
+                </a>
                 <p><%= catfood.description %></p>
             </li>
         <% }) %> 

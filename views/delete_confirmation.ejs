@@ -1,0 +1,13 @@
+<%- include ('./partials/head.ejs') %> 
+
+<main>
+    <h1>Confirm delete: <%= catfood.name %>?</h1>
+    <form method="post" action="/catfoods/<%= catfood._id %>?_method=DELETE" enctype="multipart/form-data">
+        <input type="submit" value="YES" />
+    </form>
+    <form method="get" action="/catfoods">
+        <input type="submit" value="NO" />
+    </form>
+</main>
+
+<%- include ('./partials/foot.ejs') %>
