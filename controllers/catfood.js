@@ -18,7 +18,7 @@ router.get('/catfoods', async (req, res) => {
 })
 
 //* NEW route
-router.get('/new', (req, res) => {
+router.get('/catfoods/new', (req, res) => {
     res.render('new.ejs', {
         tabTitle: 'Add New Item'
     })
@@ -33,6 +33,27 @@ router.post('/catfoods', upload.single('image'), async (req, res) => {    // upl
     } catch (error) {
         console.log(`Error creating new catfood:`, error)
     }
+})
+
+//* EDIT route
+router.get('/catfoods/:id/edit', async (req, res) => {
+    const catfood = await Catfood.findById(req.params.id)
+    res.render('edit.ejs', {
+        catfood: catfood,
+        tabTitle: `Edit: ${catfood.name}`
+    })
+})
+
+//* UPDATE route
+router.put('/catfoods/:id', async (req, res) => {
+    const catfood = await Catfood.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {new: true}
+    )
+    console.log(`Updated: `, catfood)
+    res.redirect(`/catfoods/${req.params.id}`)
+
 })
 
 //* CONFIRM_DELETE route

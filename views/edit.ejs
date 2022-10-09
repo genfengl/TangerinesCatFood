@@ -1,0 +1,32 @@
+<%- include ('./partials/head.ejs') %> 
+
+<main class="edit">
+    <h1>Edit: <%= catfood.name %> </h1>
+
+    <form method="post" action="/catfoods/<%= catfood._id %>?_method=PUT" enctype="multipart/form-data">
+        <!-- label for id of input -->
+        <label for="name">Name</label> <br />
+        <input type="text" name="name" id="name" value="<%= catfood.name %>" required /> <br />
+
+        <label for="price">Price</label> <br />
+        <input type="text" name="price" id="price" value="<%= catfood.price %>" required /> <br />
+
+        <label for="brand">Brand</label> <br />
+        <input type="text" name="brand" id="brand" value="<%= catfood.brand %>" required /> <br />
+
+        <label for="description">Description</label> <br />
+        <textarea type="text" name="description" id="description">
+            <%= catfood.description %>
+        </textarea> <br />
+
+        <label for="image">Image</label> <br />
+        <input type="file" name="image" id="image" value="<%= catfood.imageURL %>"/> <br />
+
+        <br />
+
+        <input type="submit" value="Save Changes"/>
+    </form>
+</main>
+
+<%- include ('./partials/foot.ejs') %> 
+
