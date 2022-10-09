@@ -2,11 +2,14 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
+const passport = require('passport')
 const session = require('express-session')
 const mongoDBSession = require('connect-mongodb-session')
 const methodOverride = require('method-override')
+
+const User = require('./models/users')
 const authController = require('./controllers/auth')
-const catfoodsController = require('./controllers/catfood')
+const catfoodsController = require('./controllers/catfoods')
 
 const app = express()
 const PORT = process.env.PORT

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Catfood = require('../models/catfood')
+const Catfood = require('../models/catfoods')
 const upload = require('../middlewares/upload')
 
 
