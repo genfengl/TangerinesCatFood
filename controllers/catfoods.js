@@ -41,6 +41,18 @@ router.post('/catfoods', upload.single('image'), async (req, res) => {    // upl
     }
 })
 
+//* UPDATE route
+router.put('/catfoods/:id', async (req, res) => {
+    console.log(req.body)    //! req.body is empty (sth to do with the image?)
+    const catfood = await Catfood.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+    )
+    console.log(`Updated: `, catfood)
+    res.redirect(`/catfoods`)
+})
+
 //* EDIT route
 router.get('/catfoods/:id/edit', async (req, res) => {
     const catfood = await Catfood.findById(req.params.id)
@@ -48,18 +60,6 @@ router.get('/catfoods/:id/edit', async (req, res) => {
         catfood: catfood,
         tabTitle: `Edit: ${catfood.name}`
     })
-})
-
-//* UPDATE route
-router.put('/catfoods/:id', async (req, res) => {
-    const catfood = await Catfood.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {new: true}
-    )
-    console.log(`Updated: `, catfood)
-    res.redirect(`/catfoods/${req.params.id}`)
-
 })
 
 //* CONFIRM_DELETE route
@@ -90,6 +90,5 @@ router.get('/catfoods/:id', async (req, res) => {
         console.log('Error:', error)
     }
 })
-
 
 module.exports = router

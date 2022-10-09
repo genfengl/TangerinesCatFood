@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const session = require('express-session')
+const flash = require('express-flash')
 const mongoDBSession = require('connect-mongodb-session')
 const methodOverride = require('method-override')
 
@@ -20,7 +21,6 @@ const sessionStore = new MongoDBStore({
     collection: 'sessions'
 })
 
-
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
@@ -30,6 +30,7 @@ app.use(session({
     saveUninitialized: false,
     store: sessionStore
 }))
+app.use(flash())    //* must be after app.use(session())
 
 //* Configure passport
 app.use(passport.initialize())
@@ -47,11 +48,6 @@ app.get('/', (req, res) => {
 
 app.use(authController)
 app.use(catfoodsController)
-
-
-
-
-
 
 mongoose.connect(dbURL, () => {
     console.log('Mongoose connected to:', dbURL)

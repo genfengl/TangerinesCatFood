@@ -14,25 +14,35 @@ router.get('/register', (req, res) => {
 //* Register route
 router.post('/register', async (req, res) => {
     const { username, password } = req.body
-    const user = await User.register(
-        new User({ username: username }),
-        password
-    )
-    req.login(user, () => {
-        res.redirect('/catfoods')
-    })
+    try {
+        const user = await User.register(
+            new User({ username: username }),
+            req.body.password
+        )
+        req.login(user, () => {
+            res.redirect('/catfoods')
+        })
+    } catch (error) {
+        req.flash('error', error.message)
+        res.redirect('/register')
+    }
 })
 
 //* Login route
 router.get('/login', (req, res) => {
-    res.render('login.ejs', {
-        tabTitle: 'Login'
-    })
+    if (req.isAuthenticated()) {
+        res.redirect('/catfoods')
+    } else {
+        res.render('login.ejs', {
+            tabTitle: 'Login'
+        })
+    }
 })
 
 router.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
-    successRedirect: '/catfoods'
+    successRedirect: '/catfoods',
+    failureFlash: true
 }))
 
 //* Logout route
