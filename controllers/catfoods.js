@@ -1,8 +1,14 @@
 const express = require('express')
-const router = express.Router()
+const ensureLogin = require('connect-ensure-login')
+// ensureLogin.ensureLoggedIn() to set a page to show only if logged in: login gate
+
 const Catfood = require('../models/catfoods')
 const upload = require('../middlewares/upload')
 
+const router = express.Router()
+
+router.use(ensureLogin.ensureLoggedIn())
+// All routes below will now be accessible only to logged-in users
 
 //* INDEX route
 router.get('/catfoods', async (req, res) => {

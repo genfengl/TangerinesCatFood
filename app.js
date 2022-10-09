@@ -31,6 +31,14 @@ app.use(session({
     store: sessionStore
 }))
 
+//* Configure passport
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.use(User.createStrategy())
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 app.get('/', (req, res) => {
     res.render('home.ejs', {
         tabTitle: 'Home'
