@@ -1,13 +1,31 @@
 <%- include ('./partials/head.ejs') %>
 
-<main class="show">
-    <h1><%= catfood.name %> </h1>
-    <h3>Brand: <%= catfood.brand %> </h3>
-    <h3>Price: $ <%= catfood.price.toFixed(2) %> </h3>
-    <img src="<%= catfood.imageURL %>" />
-    <p><%= catfood.description %> </p>
-    <a href="/catfoods/<%= catfood._id %>/edit ">EDIT</a>
-    <a href="/catfoods/<%= catfood._id %>/delete_confirmation">DELETE</a>
-</main>
+    <div class="container">
+        <div class="card show" >
+            <div class="card-body">
+                <h1>
+                    <%= catfood.name %>
+                </h1>
+                <h4>
+                    <%= catfood.brand %>
+                </h4>
+                <h4>
+                    $<%= catfood.price.toFixed(2) %>
+                </h4>
+            </div>
+            <img class="card-img-bottom" style="max-width: 680px;" src="<%= catfood.imageURL %>" />
+            <div class="card-bottom">
+                <p>
+                    <%= catfood.description %>
+                </p>
 
-<%- include ('./partials/foot.ejs') %>
+                <div class="show_buttons">
+                    <a href="/catfoods/<%= catfood._id %>/edit ">EDIT</a>
+                    <a href="/catfoods/<%= catfood._id %>/delete_confirmation">DELETE</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <%- include ('./partials/foot.ejs') %>

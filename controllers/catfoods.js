@@ -3,6 +3,7 @@ const ensureLogin = require('connect-ensure-login')
 // ensureLogin.ensureLoggedIn() to set a page to show only if logged in: login gate
 
 const Catfood = require('../models/catfoods')
+const User = require('../models/users')
 const upload = require('../middlewares/upload')
 
 const router = express.Router()
@@ -42,15 +43,18 @@ router.post('/catfoods', upload.single('image'), async (req, res) => {    // upl
 })
 
 //* UPDATE route
-router.put('/catfoods/:id', async (req, res) => {
+router.put('/catfoods/:id', upload.single('image'), async (req, res) => {    // need upload.single('image')
     console.log(req.body)    //! req.body is empty (sth to do with the image?)
+    if (req.file) {
+        req.body.imageURL = req.file.path
+    }
     const catfood = await Catfood.findByIdAndUpdate(
         req.params.id,
         req.body,
         { new: true }
     )
     console.log(`Updated: `, catfood)
-    res.redirect(`/catfoods`)
+    res.redirect(`/catfoods/${catfood._id}`)
 })
 
 //* EDIT route
@@ -90,5 +94,14 @@ router.get('/catfoods/:id', async (req, res) => {
         console.log('Error:', error)
     }
 })
+
+// //! USER PROFILE route
+// router.get('/catfoods/user/:id', async (req, res) => {
+//     const user = await User.findById(req.params.id)
+//     res.render('user.ejs', {
+//         user: user,
+//         tabTitle: user.username
+//     })
+// })
 
 module.exports = router

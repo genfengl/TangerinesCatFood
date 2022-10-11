@@ -1,23 +1,27 @@
 <%- include ('./partials/head.ejs') %> 
 
-<main class="index">
+<div class="index_container">
     <h1>Catalogue</h1>
-    <ul>
+    <div class="cards_container">
         <% catfoods.forEach(catfood => { %>
-            <li>
-                <h3><%= catfood.name %> </h3>
-                <h3><%= catfood.brand %> </h3>
-                <h3>Price: $ <%= catfood.price.toFixed(2) %></h3>
+            
+            <div class="card" style="width: 360px; text-align: center">
                 <a href="/catfoods/<%= catfood._id %>">
-                    <img src="<%= catfood.imageURL %>" />
+                    <img class="card-img-top" src="<%= catfood.imageURL %>" />
                 </a>
-            </li>
+                <div class="card-body">
+                   <h4> <%= catfood.name %> </h4>
+                <h4><%= catfood.brand %> </h4>
+                <h4>$<%= catfood.price.toFixed(2) %></h4>
+                </div>
+                
+            </div>
         <% }) %> 
-    </ul>
+    </div>
 
 
 
 
-</main>
+</div>
 
 <%- include ('./partials/foot.ejs') %>

@@ -1,5 +1,6 @@
 <%- include('./partials/head.ejs') %>
-    <main>
+<%- include('./partials/flash.ejs') %>
+    <div class="container">
         <h1>Login</h1>
 
         <form method="post" action="/login">
@@ -12,5 +13,5 @@
 
             <input type="submit" value="Login" />
         </form>
-    </main>
+    </div>
 <%- include('./partials/foot.ejs') %>
