@@ -7,6 +7,7 @@ const catfoodSchema = new Schema({
     brand: {type: String, required: true},
     description: String,
     imageURL: String,
+    favouritedBy: [String]
 })
 
 const Catfood = mongoose.model('Catfood', catfoodSchema)

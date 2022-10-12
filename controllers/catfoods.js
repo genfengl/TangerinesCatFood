@@ -15,9 +15,11 @@ router.use(ensureLogin.ensureLoggedIn())
 router.get('/catfoods', async (req, res) => {
     try {
         const catfoods = await Catfood.find()
+        // console.log(catfoods)
         res.render('index.ejs', {
             catfoods: catfoods,
-            tabTitle: 'Catalogue'
+            tabTitle: 'Catalogue',
+            user: req.user,
         })
     } catch (error) {
         console.log(`Error:`, error)
@@ -27,7 +29,7 @@ router.get('/catfoods', async (req, res) => {
 //* NEW route
 router.get('/catfoods/new', (req, res) => {
     res.render('new.ejs', {
-        tabTitle: 'Add New Item'
+        tabTitle: 'Add New Item',
     })
 })
 
@@ -54,7 +56,7 @@ router.put('/catfoods/:id', upload.single('image'), async (req, res) => {    // 
         { new: true }
     )
     console.log(`Updated: `, catfood)
-    res.redirect(`/catfoods/${catfood._id}`)
+    res.redirect(`/catfoods`)
 })
 
 //* EDIT route
@@ -62,7 +64,7 @@ router.get('/catfoods/:id/edit', async (req, res) => {
     const catfood = await Catfood.findById(req.params.id)
     res.render('edit.ejs', {
         catfood: catfood,
-        tabTitle: `Edit: ${catfood.name}`
+        tabTitle: `Edit: ${catfood.name}`,
     })
 })
 
@@ -71,7 +73,7 @@ router.get('/catfoods/:id/delete_confirmation', async (req, res) => {    // conf
     const catfood = await Catfood.findById(req.params.id)
     res.render('delete_confirmation.ejs', {
         catfood: catfood,
-        tabTitle: 'Delete Confirmation'
+        tabTitle: 'Delete Confirmation',
     })
 })
 
@@ -82,26 +84,59 @@ router.delete('/catfoods/:id', async (req, res) => {
     res.redirect('/catfoods')
 })
 
+//* BRAND route
+router.get('/catfoods/brand/:brandname', async (req, res) => {
+    const brandCatfood = await Catfood.find(
+        {brand: req.params.brandname}
+    )
+    res.render('brand.ejs', {
+        brandCatfood: brandCatfood,
+        brandName: req.params.brandname,
+        tabTitle: req.params.brandname
+        
+    })
+})
+
+//* ADD TO USER FAVOURITE route    (find a way to add the if statements to make sure there's no duplicate)
+router.put('/catfoods/:id/favourite', async (req, res) => {
+    console.log(req.params.id)
+    const catfood = await Catfood.updateOne(
+        {_id: req.params.id},
+        {$push: {favouritedBy: `${req.user.username}`}}
+    )
+    console.log(`Added ${catfood.name} to favourite`)
+    res.redirect('/catfoods')
+    
+    // const user = await User.updateOne(
+    //     req.user,
+    //     {$push: {"Favourite": req.params.id}}
+    // )
+    // console.log(req.user)
+})
+
+//* USER FAVOURITE route    (needs to go before SHOW route)
+router.get('/catfoods/favourite/', async (req, res) => {
+    console.log(req.user)
+    const favouritedCatfood = await Catfood.find({favouritedBy: {$in: [`${req.user.username}`]}})
+    res.render('userFavourite.ejs', {
+        favouritedCatfood : favouritedCatfood,
+        user: req.user,
+        tabTitle: `${req.user.username}'s Favourites`
+    })
+})
+
 //* SHOW route
 router.get('/catfoods/:id', async (req, res) => {
+    console.log(req.params.id)
     try {
         const catfood = await Catfood.findById(req.params.id)
         res.render('show.ejs', {
             catfood: catfood,
-            tabTitle: catfood.name
+            tabTitle: catfood.name,
         })
     } catch (error) {
         console.log('Error:', error)
     }
 })
-
-// //! USER PROFILE route
-// router.get('/catfoods/user/:id', async (req, res) => {
-//     const user = await User.findById(req.params.id)
-//     res.render('user.ejs', {
-//         user: user,
-//         tabTitle: user.username
-//     })
-// })
 
 module.exports = router

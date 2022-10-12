@@ -1,0 +1,29 @@
+<%- include ('./partials/head.ejs') %>
+
+    <div class="container">
+        <h1>
+            <%= user.username %>'s Favourite
+        </h1>
+        <div class="cards_container">
+            <% favouritedCatfood.forEach((catfood)=> { %>
+                <div class="card" style="width: 360px; text-align: center">
+                    <a href="/catfoods/<%= catfood._id %>">
+                        <img class="card-img-top" src="<%= catfood.imageURL %>" />
+                    </a>
+                    <div class="card-body">
+                        <h4>
+                            <%= catfood.name %>
+                        </h4>
+                        <h4>
+                            <%= catfood.brand %>
+                        </h4>
+                        <h4>
+                            $<%= catfood.price.toFixed(2) %>
+                        </h4>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <%- include ('./partials/foot.ejs') %>

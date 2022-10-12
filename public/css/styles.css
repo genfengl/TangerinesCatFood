@@ -13,7 +13,7 @@ html, body {
 header {
     display: flex;
     justify-content: space-between;
-    padding: 1em;
+    /* padding: 1em; */
     border-bottom: 1px solid #0d6efd
 }
 
@@ -35,14 +35,33 @@ header .nav_container {
     justify-content: center;
     flex-direction: column;
     text-align: center;
+    row-gap: 1em;
 }
 
-.cards_container {
+.cards_container, .brands_container {
     padding-top: 2em;
+    padding-bottom: 2em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1em;
+}
+
+.brands_container h4 {
+    padding-top: 1em;
+}
+
+.cards_container .card-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1.2em;
+    align-items: center;
+    column-gap: 1em;
+}
+
+.cards_container .card-body {
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr;
 }
 
 .card.show {
