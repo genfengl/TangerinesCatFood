@@ -7,6 +7,13 @@
         <div class="cards_container">
             <% favouritedCatfood.forEach((catfood)=> { %>
                 <div class="card" style="width: 360px; text-align: center">
+                    <div class="deleteFav_btn" style="text-align: left; padding-left: 0.3em">
+                        <form method="post" action="/catfoods/<%= catfood._id %>/favourite/delete?_method=PUT"
+                            enctype="multipart/form-data">
+                            <input type="submit" class="btn fa-input fa-2x " 
+                            value="&#xf00d;" />
+                        </form>
+                    </div>
                     <a href="/catfoods/<%= catfood._id %>">
                         <img class="card-img-top" src="<%= catfood.imageURL %>" />
                     </a>
@@ -21,6 +28,9 @@
                             $<%= catfood.price.toFixed(2) %>
                         </h4>
                     </div>
+                    
+                        
+                    
                 </div>
             <% }) %>
         </div>

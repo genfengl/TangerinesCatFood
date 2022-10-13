@@ -3,34 +3,29 @@
     <div class="index_container">
         <h1>Top Brands</h1>
         <div class="brands_container">
-            <div class="card" style="width: 360px; text-align: center;">
-                <% const ziwipeakExample = catfoods.find(catfood => catfood.brand === 'ZiwiPeak') %>
-                <div class="card-top">
-                    <h4><%= ziwipeakExample.brand %> </h4>
-                </div>
-                <a href="/catfoods/brand/ZiwiPeak">
-                    <img class="card-img" src="<%= ziwipeakExample.imageURL %>" />
-                </a>
-            </div>
+            
+                <% const brands = [] %>
+                <% catfoods.forEach((catfood) => { %>
+                   <%   if (brands.indexOf(catfood.brand) === -1) {  %>
+                    <%       brands.push(catfood.brand) }  %>
+                <% }) %> 
+                <% brands.forEach(brand => { %>
+                    <div class="card" style="width: 180px; text-align: center;">
+                        <div class="card-top">
+                            <h4><%= brand %> </h4>
+                        </div>
+                        <a href="/catfoods/brand/<%= brand %> ">
+                            <% const brandSample = catfoods.find(catfood => catfood.brand === `${brand}`) %> 
+                            <img class="card-img" src="<%= brandSample.imageURL %>" />
+                        </a>
+                    </div>
+                <% }) %> 
         </div>
         <h1>All Products</h1>
         <div class="cards_container">
             <% catfoods.forEach(catfood=> { %>
                 <div class="card" style="width: 360px; text-align: center">
-                    <div class="card-header">
-                        <div class="edit_btn">
-                            <a href="/catfoods/<%= catfood._id %>/edit ">
-                                <i class="fa-solid fa-pen-to-square fa-2xl"></i>
-                            </a>
-                        </div>
-                        <div class="fav_btn">
-                            <form method="post" action="/catfoods/<%= catfood._id %>/favourite?_method=PUT"
-                                enctype="multipart/form-data">
-                                <input type="submit" value="Add to favourite" />
-                            </form>
-                        </div>
-
-                    </div>
+                    
                     <a href="/catfoods/<%= catfood._id %>">
                         <img class="card-img-top" src="<%= catfood.imageURL %>" />
                     </a>
@@ -43,9 +38,15 @@
                         </h4>
                         <h4>$<%= catfood.price.toFixed(2) %>
                         </h4>
-
                     </div>
-
+                    <div style="text-align: right; padding-right: 0.3em">
+                        <form method="post" action="/catfoods/<%= catfood._id %>/favourite?_method=PUT"
+                            enctype="multipart/form-data">
+                            <input type="submit" class="btn fa-input fa-2x " 
+                            value="&#xf004;" />
+                        </form>
+                    </div>
+                    
                 </div>
                 <% }) %>
         </div>

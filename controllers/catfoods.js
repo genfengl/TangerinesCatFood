@@ -3,7 +3,6 @@ const ensureLogin = require('connect-ensure-login')
 // ensureLogin.ensureLoggedIn() to set a page to show only if logged in: login gate
 
 const Catfood = require('../models/catfoods')
-const User = require('../models/users')
 const upload = require('../middlewares/upload')
 
 const router = express.Router()
@@ -97,6 +96,17 @@ router.get('/catfoods/brand/:brandname', async (req, res) => {
     })
 })
 
+//* DELETE FROM USER FAVOURITE route
+router.put('/catfoods/:id/favourite/delete', async (req, res) => {
+    console.log(req.params.id)
+    const catfood = await Catfood.updateOne(
+        {_id: req.params.id},
+        {$pull: {favouritedBy: `${req.user.username}`}}
+    )
+    console.log(`Removed from favourite: `, catfood)
+    res.redirect('/catfoods/favourite')
+})
+
 //* ADD TO USER FAVOURITE route    (find a way to add the if statements to make sure there's no duplicate)
 router.put('/catfoods/:id/favourite', async (req, res) => {
     console.log(req.params.id)
@@ -104,14 +114,8 @@ router.put('/catfoods/:id/favourite', async (req, res) => {
         {_id: req.params.id},
         {$push: {favouritedBy: `${req.user.username}`}}
     )
-    console.log(`Added ${catfood.name} to favourite`)
+    console.log(`Added to favourite: `, catfood)
     res.redirect('/catfoods')
-    
-    // const user = await User.updateOne(
-    //     req.user,
-    //     {$push: {"Favourite": req.params.id}}
-    // )
-    // console.log(req.user)
 })
 
 //* USER FAVOURITE route    (needs to go before SHOW route)

@@ -10,24 +10,30 @@ html, body {
     padding-bottom: 1em;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    /* padding: 1em; */
-    border-bottom: 1px solid #0d6efd
-}
+/* header {
+    border-bottom: 1px solid #0d6efd;
+} */
 
-header h1 {
-    padding: 1em;
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+ }
+
+ .fa-input { 
+    font-family: FontAwesome, ‘Helvetica Neue’, Helvetica, Arial, sans-serif; 
     color: #0d6efd;
 }
 
-header .nav_container {
+/* header h1 {
+    padding: 1em;
+    color: #0d6efd;
+} */
+
+/* header .nav_container {
     padding: 1em;
     display: flex;
     column-gap: 1em;
     align-items: center;
-}
+} */
 
 .index_container {
     padding: 2em 0;
@@ -54,7 +60,7 @@ header .nav_container {
 .cards_container .card-header {
     display: flex;
     justify-content: flex-end;
-    padding: 1.2em;
+    padding: 1em;
     align-items: center;
     column-gap: 1em;
 }

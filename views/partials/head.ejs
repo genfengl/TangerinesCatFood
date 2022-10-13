@@ -5,31 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/2b8c06cb4b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/styles.css" />
     <title>Tangerine's Cat Food | <%= tabTitle %> </title>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
             <div class="container">
                 <h1 class="navbar-brand">Tangerine's Cat Food Catalogue</h1>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/catfoods">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/catfoods/favourite/ ">Favourite</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/catfoods/new">Create</a>
-                        </li>
-                        <li>
-                            <form action="/logout" method="post">
-                                <input class="nav-link" type="submit" value="Logout" />
-                            </form>
-                        </li>
-                    </ul>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+
+                    <div class="collapse navbar-collapse" id="navmenu">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item active" type="button">
+                                <a class="nav-link btn btn-primary" href="/catfoods">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-primary" href="/catfoods/favourite/ ">Favourite</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-primary" href="/catfoods/new">Create</a>
+                            </li>
+                            <li>
+                                <form action="/logout" method="post">
+                                    <input class="nav-link btn btn-primary " type="submit" value="Logout"/>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    
                
             </div>
         </nav>
