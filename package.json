@@ -20,6 +20,9 @@
   "name": "tangerinescatfood",
   "description": "Using Node.js, Express, MongoDB, and Mongoose to create a CRUD app for a cat food catalogue",
   "version": "1.0.0",
+  "engines": {
+    "node": "18.9.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
