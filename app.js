@@ -1,4 +1,5 @@
-require('dotenv').config()
+const dotenv = require('dotenv')
+dotenv.config({path:__dirname+'/.env'})
 
 const express = require('express')
 const mongoose = require('mongoose')
